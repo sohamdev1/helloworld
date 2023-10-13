@@ -1,0 +1,40 @@
+{
+  "name": "helloworld",
+  "version": "0.0.0",
+  "description": "helloworld",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sohamdev1/helloworld.git"
+  },
+  "author": "sohamdev1",
+  "license": "MIT",
+  "private": false,
+  "bugs": {
+    "url": "https://github.com/sohamdev1/helloworld/issues"
+  },
+  "homepage": "https://github.com/sohamdev1/helloworld#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "*.ts": "eslint --cache --cache-location .eslintcache --fix"
+  },
+  "devDependencies": {
+    "commitizen": "^4.3.0",
+    "conventional-changelog-conventionalcommits": "^7.0.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "semantic-release": "^22.0.5"
+  }
+}
