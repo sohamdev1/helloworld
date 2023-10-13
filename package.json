@@ -9,7 +9,7 @@
   },
   "author": "sohamdev1",
   "license": "MIT",
-  "private": false,
+  "private": true,
   "bugs": {
     "url": "https://github.com/sohamdev1/helloworld/issues"
   },
