@@ -11,8 +11,6 @@ jobs:
     steps:
     - name: Install dependencies
       run: yarn install --frozen-lockfile
-    - name: Test
-      run: yarn test
     - name: Build
       run: yarn build
     - name: Generate release

@@ -14,9 +14,7 @@
     "url": "https://github.com/sohamdev1/helloworld/issues"
   },
   "homepage": "https://github.com/sohamdev1/helloworld#readme",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
