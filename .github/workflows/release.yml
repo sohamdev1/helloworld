@@ -1,0 +1,23 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Release creator
+
+# Controls when the action will run. Triggers the workflow on push or pull request merge
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+jobs:
+  manage_release_job:
+    runs-on: ubuntu-latest
+    name: Generate release
+    steps:
+    - name: Generate release
+      id: release
+      uses: home-furnishing-nordic/semver-release-manager@master
+      with:
+        # secret github token, required
+        github_token: "${{ secrets.GITHUB_TOKEN }}"
+    # Use the output from the `release` step
+    - name: Get the output time
+      run: echo "Released in ${{ steps.release.outputs.time }}!"
