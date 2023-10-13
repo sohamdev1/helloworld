@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Generate release
     steps:
+    - uses: actions/checkout@v3
     - name: Install dependencies
       run: yarn install
     - name: Build
@@ -17,3 +18,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: npx semantic-release
+
