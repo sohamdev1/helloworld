@@ -2,19 +2,27 @@
   "name": "helloworld",
   "version": "0.0.0",
   "description": "helloworld",
-  "main": "index.js",
+  "main": "dist-electron/main.js",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/sohamdev1/helloworld.git"
   },
-  "author": "sohamdev1",
+  "author": {
+    "email": "sohamdevs@yahoo.com",
+    "name": "Soham Dev"
+  },
   "license": "MIT",
   "private": true,
   "bugs": {
     "url": "https://github.com/sohamdev1/helloworld/issues"
   },
   "homepage": "https://github.com/sohamdev1/helloworld#readme",
-  "scripts": {},
+  "scripts": {
+    "dev": "vite",
+    "build": "NODE_ENV=production && vite build && electron-builder -l",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
@@ -24,15 +32,25 @@
     "*.ts": "eslint --cache --cache-location .eslintcache --fix"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^4.1.0",
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^7.0.2",
     "cz-conventional-changelog": "^3.3.0",
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.0.0",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
-    "semantic-release": "^22.0.5"
+    "semantic-release": "^22.0.5",
+    "vite": "^4.4.11",
+    "vite-plugin-electron": "^0.14.1",
+    "vite-plugin-electron-renderer": "^0.14.5"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
