@@ -6,30 +6,24 @@ on:
     branches: [ master ]
 jobs:
   release:
+    name: Generate release
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        node_version: ['18']
         os: [macos-latest, ubuntu-latest, windows-latest]
-    name: Generate release
     steps:
-    - name: Check out Git repository
-      uses: actions/checkout@v1
-    - name: Install Node.js, NPM and Yarn
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node_version }}
       uses: actions/setup-node@v1
       with:
-        node-version: 16
+        node-version: ${{ matrix.node_version }}
 
-    - name: Install dependencies
-      run: npm install
-
-    - name: Installing maxOS related dependencies
-      if: startsWith(matrix.os, 'macos')
-      run: npm i dmg-license
-    #- uses: actions/checkout@v3
-    #- name: Install dependencies
-    #  run: yarn install
-    #- name: Generate release
+    - name: Install, build
+      run: |
+        npm install
+        npm run build
+        npx semantic-release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: npx semantic-release
 
