@@ -19,10 +19,23 @@ jobs:
       with:
         node-version: ${{ matrix.node_version }}
 
-    - name: Install, build
+    - name: Build Linux
+      if: startsWith(matrix.os, 'ubuntu')
       run: |
         npm install
-        npm run build
+        npm run buildL
+        npx semantic-release
+    - name: Build Win
+      if: startsWith(matrix.os, 'windows')
+      run: |
+        npm install
+        npm run buildW
+        npx semantic-release
+    - name: Build Mac
+      if: startsWith(matrix.os, 'macos')
+      run: |
+        npm install
+        npm run buildM
         npx semantic-release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
