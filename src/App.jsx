@@ -8,7 +8,7 @@ function App() {
     <>
       <div className='flex flex-row justify-center'>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          Vite logo
+          App logo
         </a>
       </div>
       <h1>Vite + React</h1>
