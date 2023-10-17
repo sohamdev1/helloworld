@@ -20,6 +20,9 @@
   "scripts": {
     "dev": "vite",
     "build": "NODE_ENV=production && vite build && electron-builder -l",
+    "buildL": "vite build && electron-builder -l",
+    "buildW": "vite build && electron-builder -w",
+    "buildM": "vite build && electron-builder -m",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "config": {
