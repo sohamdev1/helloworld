@@ -19,7 +19,7 @@
   "homepage": "https://github.com/sohamdev1/helloworld#readme",
   "scripts": {
     "dev": "vite",
-    "build": "NODE_ENV=production && vite build && electron-builder -l",
+    "build": "vite build && electron-builder -l",
     "buildL": "vite build && electron-builder -l",
     "buildW": "vite build && electron-builder -w",
     "buildM": "vite build && electron-builder -m",
