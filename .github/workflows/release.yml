@@ -94,7 +94,7 @@ jobs:
           node-version: 16
           cache: 'npm'
 
-      - run: npm c
+      - run: npm i
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
 
