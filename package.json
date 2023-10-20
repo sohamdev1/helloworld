@@ -23,7 +23,9 @@
     "buildL": "vite build && electron-builder -l",
     "buildW": "vite build && electron-builder -w",
     "buildM": "vite build && electron-builder -m",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "release": "electron-builder --config .electron-builder.config.js --publish always",
+    "updateVersion": "semantic-release"
   },
   "config": {
     "commitizen": {
@@ -34,6 +36,9 @@
     "*.ts": "eslint --cache --cache-location .eslintcache --fix"
   },
   "devDependencies": {
+    "@semantic-release/commit-analyzer": "^11.0.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^11.0.0",
     "@vitejs/plugin-react": "^4.1.0",
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^7.0.2",
@@ -47,6 +52,7 @@
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
     "semantic-release": "^22.0.5",
+    "semantic-release-export-data": "^1.0.1",
     "vite": "^4.4.11",
     "vite-plugin-electron": "^0.14.1",
     "vite-plugin-electron-renderer": "^0.14.5"

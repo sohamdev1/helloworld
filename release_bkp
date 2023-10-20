@@ -1,0 +1,31 @@
+
+name: Release
+
+on:
+  push:
+    branches: [ master ]
+jobs:
+  release:
+    name: Generate release
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: ['18']
+        os: [ubuntu-latest]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node_version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node_version }}
+
+    - name: Build Linux
+      if: startsWith(matrix.os, 'ubuntu')
+      run: |
+        npm install
+        npm run buildL
+        npx semantic-release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
