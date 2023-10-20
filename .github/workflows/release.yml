@@ -98,10 +98,10 @@ jobs:
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
 
-      - name: Prepare release notes
-        env:
-          RELEASE_NOTE: ${{ needs.draft.outputs.release-note }}
-        run: echo "$RELEASE_NOTE" >> ./buildResources/release-notes.md
+      # - name: Prepare release notes
+      #   env:
+      #     RELEASE_NOTE: ${{ needs.draft.outputs.release-note }}
+      #   run: echo "$RELEASE_NOTE" >> ./buildResources/release-notes.md
 
       - name: Show version
         run: echo "Next Version is ${{ needs.draft.outputs.version }} (${{ github.ref_name }})"
