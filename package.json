@@ -24,7 +24,7 @@
     "buildW": "vite build && electron-builder -w",
     "buildM": "vite build && electron-builder -m",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "release": "electron-builder --config .electron-builder.config.js --publish always",
+    "release": "electron-builder --config electron-builder.json5 --publish always",
     "updateVersion": "semantic-release"
   },
   "config": {
