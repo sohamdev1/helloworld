@@ -25,12 +25,6 @@
         "arch": [
           "arm64", "x64", "ia32"
         ]
-      },
-      {
-        "target": "msi",
-        "arch": [
-          "x86", "x64", "ia64"
-        ]
       }
     ],
     "artifactName": "${productName}_${version}.${ext}"
