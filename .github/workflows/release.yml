@@ -71,8 +71,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          prerelease: false
-          draft: false
+          prerelease: true
+          draft: true
           tag_name: v${{ needs.get-next-version.outputs.new-release-version }}
           name: v${{ needs.get-next-version.outputs.new-release-version }}
           body: ${{ steps.release-note.outputs.release-note }}
