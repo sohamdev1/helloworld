@@ -32,7 +32,7 @@ jobs:
       new-release-published: ${{ steps.get-next-version.outputs.new-release-published }}
       new-release-version: ${{ steps.get-next-version.outputs.new-release-version }}
 
-  draft:
+  artifacts:
     needs: [get-next-version]
     runs-on: ubuntu-latest
     if: needs.get-next-version.outputs.new-release-published == 'true'
@@ -66,7 +66,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create Release Draft
+      - name: Create Release Files
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -81,7 +81,7 @@ jobs:
       version: ${{ needs.get-next-version.outputs.new-release-version }}
 
   upload_artifacts:
-    needs: [draft]
+    needs: [artifacts]
 
     strategy:
       matrix:
@@ -102,17 +102,17 @@ jobs:
 
       - name: Prepare release notes
         env:
-          RELEASE_NOTE: ${{ needs.draft.outputs.release-note }}
+          RELEASE_NOTE: ${{ needs.artifacts.outputs.release-note }}
         run: echo "$RELEASE_NOTE" >> ./buildResources/release-notes.md
 
       - name: Show version
-        run: echo "Next Version is ${{ needs.draft.outputs.version }} (${{ github.ref_name }})"
+        run: echo "Next Version is ${{ needs.artifacts.outputs.version }} (${{ github.ref_name }})"
 
       - name: Update and push version tag
         run: npm run updateVersion
 
       - name: Write next version to meta.json
-        run: echo "{\"version\":\"${{ needs.draft.outputs.version }}\"}" >| ./buildResources/meta.json
+        run: echo "{\"version\":\"${{ needs.artifacts.outputs.version }}\"}" >| ./buildResources/meta.json
 
       - name: Build the app
         env:
@@ -122,9 +122,9 @@ jobs:
       - name: Compile & release Electron app
         id: release-to-github
         env:
-          VITE_APP_VERSION: ${{ needs.draft.outputs.version }}
+          VITE_APP_VERSION: ${{ needs.artifacts.outputs.version }}
         run: npm run release
 
       - name: Delete tag for failed release
         if: steps.release-to-github.outcome == 'failure'
-        run: git push --delete origin v${{ needs.draft.outputs.version }}```
+        run: git push --delete origin v${{ needs.artifacts.outputs.version }}```
