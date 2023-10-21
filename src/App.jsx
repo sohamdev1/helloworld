@@ -3,6 +3,7 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [bg, setBg] = useState('#fff')
 
   return (
     <>
@@ -13,6 +14,8 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
+        <button onClick={() => setBg('#fff')}>Bg Light</button>
+        <button onClick={() => setBg('#333')}>Bg Dark</button>
         <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR

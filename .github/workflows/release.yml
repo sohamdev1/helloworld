@@ -1,4 +1,4 @@
-name: Release A New Version
+name: Release
 on:
   push:
     branches: [ master ]
@@ -35,7 +35,7 @@ jobs:
   draft:
     needs: [get-next-version]
     runs-on: ubuntu-latest
-    # if: needs.get-next-version.outputs.new-release-published == 'true'
+    if: needs.get-next-version.outputs.new-release-published == 'true'
     steps:
       - uses: actions/checkout@v3
         with:
