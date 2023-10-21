@@ -41,6 +41,6 @@
       Encoding: "UTF-8",
       MimeType: "x-scheme-handler/deeplink"
     },
-    target: ["AppImage", "deb", "snap", "rpm", "tar.gz", "tar.xz"]
+    target: ["AppImage", "deb"]
   }
 }
