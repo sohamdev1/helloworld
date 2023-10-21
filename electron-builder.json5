@@ -23,7 +23,7 @@
       {
         "target": "portable",
         "arch": [
-          "arm64", "x86", "x64", "ia64"
+          "arm64", "x64", "ia32"
         ]
       },
       {
