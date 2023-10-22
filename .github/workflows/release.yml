@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18.17
-      - run: npm i
+      - run: npm clean-install
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - run: npx semantic-release --dry-run
@@ -61,10 +61,10 @@ jobs:
           include-commit-body: true
           include-abbreviated-commit: true
 
-      - name: Delete outdated drafts
-        uses: hugo19941994/delete-draft-releases@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Delete outdated drafts
+      #   uses: hugo19941994/delete-draft-releases@v1.0.0
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release Files
         uses: softprops/action-gh-release@v1
@@ -96,7 +96,7 @@ jobs:
           node-version: 18.17
           cache: 'npm'
 
-      - run: npm i
+      - run: npm clean-install
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
 
