@@ -84,8 +84,9 @@ jobs:
     needs: [artifacts]
 
     strategy:
+      fail-fast: true
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     runs-on: ${{ matrix.os }}
 
@@ -100,19 +101,19 @@ jobs:
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
 
-      - name: Prepare release notes
-        env:
-          RELEASE_NOTE: ${{ needs.artifacts.outputs.release-note }}
-        run: echo "$RELEASE_NOTE" >> ./buildResources/release-notes.md
+      # - name: Prepare release notes
+      #   env:
+      #     RELEASE_NOTE: ${{ needs.artifacts.outputs.release-note }}
+      #   run: echo "$RELEASE_NOTE" >> ./buildResources/release-notes.md
 
       - name: Show version
         run: echo "Next Version is ${{ needs.artifacts.outputs.version }} (${{ github.ref_name }})"
 
-      - name: Update and push version tag
-        run: npm run updateVersion
+      # - name: Update and push version tag
+      #   run: npm run updateVersion
 
-      - name: Write next version to meta.json
-        run: echo "{\"version\":\"${{ needs.artifacts.outputs.version }}\"}" >| ./buildResources/meta.json
+      # - name: Write next version to meta.json
+      #   run: echo "{\"version\":\"${{ needs.artifacts.outputs.version }}\"}" >| ./buildResources/meta.json
 
       - name: Build the app
         env:
@@ -125,6 +126,6 @@ jobs:
           VITE_APP_VERSION: ${{ needs.artifacts.outputs.version }}
         run: npm run release
 
-      - name: Delete tag for failed release
-        if: steps.release-to-github.outcome == 'failure'
-        run: git push --delete origin v${{ needs.artifacts.outputs.version }}```
+      # - name: Delete tag for failed release
+      #   if: steps.release-to-github.outcome == 'failure'
+      #   run: git push --delete origin v${{ needs.artifacts.outputs.version }}```
