@@ -109,8 +109,8 @@ jobs:
       - name: Show version
         run: echo "Next Version is ${{ needs.artifacts.outputs.version }} (${{ github.ref_name }})"
 
-      # - name: Update and push version tag
-      #   run: npm run updateVersion
+      - name: Update and push version tag
+        run: npm run updateVersion
 
       # - name: Write next version to meta.json
       #   run: echo "{\"version\":\"${{ needs.artifacts.outputs.version }}\"}" >| ./buildResources/meta.json
@@ -118,13 +118,14 @@ jobs:
       - name: Build the app
         env:
           MODE: 'production'
+          VITE_APP_VERSION: ${{ needs.artifacts.outputs.version }}
         run: npm run build
 
-      - name: Compile & release Electron app
-        id: release-to-github
-        env:
-          VITE_APP_VERSION: ${{ needs.artifacts.outputs.version }}
-        run: npm run release
+      # - name: Compile & release Electron app
+      #   id: release-to-github
+      #   env:
+      #     VITE_APP_VERSION: ${{ needs.artifacts.outputs.version }}
+      #   run: npm run release
 
       # - name: Delete tag for failed release
       #   if: steps.release-to-github.outcome == 'failure'
