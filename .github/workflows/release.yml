@@ -59,11 +59,22 @@ jobs:
           include-commit-body: true
           include-abbreviated-commit: true
 
-      # - name: Delete outdated drafts
-      #   uses: hugo19941994/delete-draft-releases@v1.0.0
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Delete outdated drafts
+        uses: hugo19941994/delete-draft-releases@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Prepare release notes
+        env:
+          RELEASE_NOTE: ${{ needs.artifacts.outputs.release-note }}
+        run: echo "$RELEASE_NOTE" >> ./buildResources/release-notes.md
+
+      - name: Show version
+        run: echo "Next Version is ${{ needs.artifacts.outputs.version }} (${{ github.ref_name }})"
+
+      - name: Update and push version tag
+        run: npm run updateVersion
+      
       - name: Create Release Files
         uses: softprops/action-gh-release@v1
         env:
@@ -99,16 +110,6 @@ jobs:
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
 
-      - name: Prepare release notes
-        env:
-          RELEASE_NOTE: ${{ needs.artifacts.outputs.release-note }}
-        run: echo "$RELEASE_NOTE" >> ./buildResources/release-notes.md
-
-      - name: Show version
-        run: echo "Next Version is ${{ needs.artifacts.outputs.version }} (${{ github.ref_name }})"
-
-      - name: Update and push version tag
-        run: npm run updateVersion
 
       # - name: Write next version to meta.json
       #   run: echo "{\"version\":\"${{ needs.artifacts.outputs.version }}\"}" >| ./buildResources/meta.json
